@@ -40,16 +40,23 @@ router.post('/add', upload.single('file'), function(req, res, next) {
     let params = {
       
     };
-
-    siteDB.test((result) => {
-      res.json(result);
-    }, (error) => {
-      res.status(200)
-      .set('Content-Type', 'text/plain;charset=UTF-8')
-      .end(error);
-    });
   });
-  
 });
+
+router.get('/l_site', function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+  res.setHeader("Access-Control-Max-Age", "3600");
+  res.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  siteDB.l_site((result) => {
+    res.json(result);
+  }, (error) => {
+    res.status(200)
+    .set('Content-Type', 'text/plain;charset=UTF-8')
+    .end(error);
+  });
+});
+
 
 module.exports = router;

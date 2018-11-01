@@ -5,7 +5,7 @@ module.exports = {
     this.connection = conn // 변수를 알아서 만들어준다.
   },
 
-  test (successFn, errorFn) {
+  l_site (successFn, errorFn) {
     this.connection.query(
     'select * from alba3.site',
     function (error, result) {
