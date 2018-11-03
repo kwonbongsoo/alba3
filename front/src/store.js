@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
-const api_url = "http://127.0.0.1:3000/";
+const api_url = "http://13.125.241.78:3000/";
+// const api_url = "http://127.0.0.1:3000/";
 
 Vue.use(Vuex)
 
@@ -11,15 +12,57 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
     progress: false,
+    dialog: {
+      title: '',
+      desc: '',
+      dialog: false
+    },
+    d_site: {
+      imgOriName: '',
+      no: '',
+    },
+    sites: [],
+    site_detail: {
+      icon_name: '',
+      icon_url: '',
+      new_browser_yn: '',
+      no: 0,
+      site_name: '',
+      site_url: '',
+    }
   },
   getters: {
     progress: function(state) {
-      return state.progress
+      return state.progress;
+    },
+    dialog: function(state) {
+      return state.dialog;
+    },
+    d_site: function(state) {
+      return state.d_site;
+    },
+    sites: function(state) {
+      return state.sites;
+    },
+    site_detail: function(state) {
+      return state.site_detail;
     },
   },
   mutations: {
     progress: (state, progress) => {
-      state.progress = progress
+      state.progress = progress;
+    },
+    dialog: (state, dialog) => {
+      state.dialog = dialog;
+    },
+    d_site: (state, d_site) => {
+      state.d_site = d_site;
+    },
+    sites: (state, sites) => {
+      state.sites = sites;
+    },
+    site_detail: (state, site_detail) => {
+      state.site_detail = site_detail;
     },
   },
   actions: {
@@ -32,7 +75,46 @@ export default new Vuex.Store({
           responseType: 'json'
         })
         .then((res) => {
+          context.commit('sites', res.data);
+        })
+      })
+    },
+    d_site: (context, params) => {
+      return new Promise((resolve) => {
+        axios({
+          method: 'get',
+          params: params,
+          url: api_url + 'site/d_site',
+          responseType: 'json'
+        })
+        .then((res) => {
           resolve(res.data);
+        })
+      })
+    },
+    add: (context, params) => {
+      return new Promise((resolve, reject) => {
+        axios.post( api_url + 'site/add',
+          params, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then((res) => {
+          resolve(res.data[0]);
+        })
+      })
+    },
+    update: (context, params) => {
+      return new Promise((resolve, reject) => {
+        axios.post( api_url + 'site/update',
+          params, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then((res) => {
+          resolve(res.data[0]);
         })
       })
     },

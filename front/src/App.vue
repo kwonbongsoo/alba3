@@ -39,13 +39,18 @@
       color="primary"
       indeterminate
     ></v-progress-circular>
+    <div v-if="progress" class="click_disabled"></div>
+    <popup/>
   </v-app>
 </template>
 
 <script>
+import popup from './components/popup';
 export default {
-  name: 'App',    
-  
+  name: 'App', 
+  components: {
+    popup
+  },   
   data () {
     return {
       drawer: false,
@@ -57,6 +62,18 @@ export default {
     progress() {
       return this.$store.getters.progress;
     },
+  },
+  mounted () {
+    this.$store.commit('d_site', {
+      imgOriName: '',
+      no: '',
+    });
+
+    this.$store.commit('dialog', {
+      title: '',
+      desc: '',
+      dialog: false
+    });
   },
   methods: {
     
@@ -95,5 +112,13 @@ export default {
 .v-badge__badge {
   top: 0!important;
   right: 30px!important;
+}
+.click_disabled {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  z-index: 998;
 }
 </style>

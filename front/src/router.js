@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Site from './views/Site.vue'
+import SiteInfo from './views/SiteInfo.vue'
 
 Vue.use(Router)
 
@@ -12,6 +13,11 @@ export default new Router({
       path: '/',
       name: 'site',
       component: Site
+    },
+    {
+      path: '/siteInfo',
+      name: 'siteInfo',
+      component: SiteInfo
     },
     {
       path: '/about',

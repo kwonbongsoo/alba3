@@ -16,20 +16,46 @@ module.exports = {
             successFn(result)
         }
     })
-  }
-//   add(params, successFn, errorFn) {
-//     this.connection.query(
-//       'CALL add_product(?, ?, ?, ?, ?, ?, ?, ?, ?)',
-//       [params.name, params.price, params.desc, params.o_name, params.o_price, params.o_cnt, params.imageName, params.img_path, params.store_no],
-//       function (error, result) {
-//         console.log(error)
-//         if (error) {
-//           errorFn(error)
-//         } else {
-//           successFn(result)
-//         }
-//       })
-//   },
+  },
+  add(params, successFn, errorFn) {
+    this.connection.query(
+      'CALL add_site(?, ?, ?, ?, ?)',
+      [params.site_url, params.site_name, params.new_browser_yn, params.icon_url, params.icon_name],
+      function (error, result) {
+        console.log(error);
+        if (error) {
+          errorFn(error)
+        } else {
+          successFn(result)
+        }
+      })
+  },
+  update(params, successFn, errorFn) {
+    this.connection.query(
+      'CALL update_site(?, ?, ?, ?, ?, ?)',
+      [params.site_url, params.site_name, params.new_browser_yn, params.icon_url, params.icon_name, params.no],
+      function (error, result) {
+        console.log(error);
+        if (error) {
+          errorFn(error)
+        } else {
+          successFn(result)
+        }
+      })
+  },
+  d_site (no, successFn, errorFn) {
+    this.connection.query(
+      'CALL d_site(?)',
+      [no],
+      function (error, result) {
+        console.log(error);
+        if (error) {
+          errorFn(error)
+        } else {
+          successFn(result)
+        }
+      })
+  },
 //   update(params, successFn, errorFn) {
 //     this.connection.query(
 //       'CALL update_product(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
