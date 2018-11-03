@@ -32,7 +32,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn v-if="site_detail.no === 0" color="blue darken-1" @click="clear">Clear</v-btn>
-        <v-btn color="blue darken-1" @click="submit">등록</v-btn>
+        <v-btn color="blue darken-1" @click="submit"> {{ site_detail.no === 0 ? '등록' : '수정'}} </v-btn>
       </v-card-actions>
     </v-card>
   </v-container>
@@ -57,11 +57,14 @@ export default {
       this.siteName = detail.site_name;
       this.siteUrl = detail.site_url;
       this.imgOriName = detail.icon_name;
+      this.newBrowserYn = detail.new_browser_yn;
       return detail;
-    }
+    },
   },
   mounted () {
+    this.$store.commit('header_title', '사이트 상세정보');
     this.$store.commit('progress', false);
+    this.$store.commit('site_add_btn', false);
   },
   methods: {
     clearImg() {
@@ -97,6 +100,9 @@ export default {
       this.imageName = ''
       this.imageFile = ''
       this.imageUrl = ''
+      this.siteName = ''
+      this.siteUrl = ''
+      this.newBrowserYn = 'N'
     },
     submit () {
       if (this.siteName == '') {
@@ -167,10 +173,6 @@ export default {
             this.$router.push('/');
           })
         }
-          
-
-        
-        
       }
     },
   },

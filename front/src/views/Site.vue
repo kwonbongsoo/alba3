@@ -21,8 +21,8 @@
             <v-img 
               @click="goSiteInfo(props.item)"
               :aspect-ratio="1"
-              :src="props.item.icon_url
-            "/>
+              :src="props.item.icon_url"
+            />
             <v-icon @click="deleteSite(props.item)" class="clear_icon">clear</v-icon>
           </v-card-title>
           <v-divider></v-divider>
@@ -46,7 +46,9 @@ export default {
 
   }),
   mounted () {
-    this.$store.dispatch('l_site', []);
+    this.$store.commit('site_add_btn', true);
+    this.$store.dispatch('l_site', '');
+    this.$store.commit('header_title', '사이트 리스트');
     this.$store.commit('site_detail', {
       icon_name: '',
       icon_url: '',
@@ -59,7 +61,7 @@ export default {
   computed: {
     sites () {
       return this.$store.getters.sites;
-    }
+    },
   },
   methods: {
     goSiteInfo (site) {
@@ -67,24 +69,17 @@ export default {
       this.$router.push('/siteInfo');
     },
     deleteSite (site) {
-
       let params = {
         imgOriName: site.icon_name,
         no: site.no,
       }
       this.$store.commit('d_site', params);
-
-
       params = {
         title: '사이트 삭제',
         desc: '정말 이 사이트를 삭제 하시겠습니까?',
         dialog: true
       }
-
       this.$store.commit('dialog', params);
-
-      
-      
     },
   }
 }

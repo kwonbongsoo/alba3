@@ -29,7 +29,9 @@ export default new Vuex.Store({
       no: 0,
       site_name: '',
       site_url: '',
-    }
+    },
+    site_add_btn: false,
+    header_title: '',
   },
   getters: {
     progress: function(state) {
@@ -46,6 +48,12 @@ export default new Vuex.Store({
     },
     site_detail: function(state) {
       return state.site_detail;
+    },
+    site_add_btn: function(state) {
+      return state.site_add_btn;
+    },
+    header_title: function(state) {
+      return state.header_title;
     },
   },
   mutations: {
@@ -64,6 +72,12 @@ export default new Vuex.Store({
     site_detail: (state, site_detail) => {
       state.site_detail = site_detail;
     },
+    site_add_btn: (state, site_add_btn) => {
+      state.site_add_btn = site_add_btn;
+    },
+    header_title: (state, header_title) => {
+      state.header_title = header_title;
+    },
   },
   actions: {
     l_site: (context, params) => {
@@ -75,6 +89,7 @@ export default new Vuex.Store({
           responseType: 'json'
         })
         .then((res) => {
+          // console.log(res);
           context.commit('sites', res.data);
         })
       })
