@@ -18,6 +18,14 @@
             <v-list-tile-title>사이트 리스트</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile v-show="login_info.is_login" @click="logout">
+          <v-list-tile-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>로그아웃</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -66,6 +74,9 @@ export default {
     },
     header_title () {
       return this.$store.getters.header_title;
+    },
+    login_info () {
+      return this.$store.getters.login_info;
     }
   },
   mounted () {
@@ -86,6 +97,16 @@ export default {
     },
     siteListGo () {
       this.$router.push('/');
+    },
+    logout () {
+      let params = {
+        id: '',
+        password: '',
+        is_login: false
+      }
+      this.$store.commit('login_info', params);
+      alert('로그아웃 되었습니다');
+      this.$router.push('/login');
     }
   }
 }

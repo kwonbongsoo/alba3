@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
-const api_url = "http://13.125.241.78:3000/";
-// const api_url = "http://127.0.0.1:3000/";
+// const api_url = "http://13.125.241.78:3000/";
+const api_url = "http://127.0.0.1:3000/";
 
 Vue.use(Vuex)
 
@@ -32,6 +32,11 @@ export default new Vuex.Store({
     },
     site_add_btn: false,
     header_title: '',
+    login_info: {
+      id: '',
+      password: '',
+      is_login: false
+    },
   },
   getters: {
     progress: function(state) {
@@ -55,6 +60,9 @@ export default new Vuex.Store({
     header_title: function(state) {
       return state.header_title;
     },
+    login_info: function(state) {
+      return state.login_info;
+    },
   },
   mutations: {
     progress: (state, progress) => {
@@ -77,6 +85,9 @@ export default new Vuex.Store({
     },
     header_title: (state, header_title) => {
       state.header_title = header_title;
+    },
+    login_info: (state, login_info) => {
+      state.login_info = login_info;
     },
   },
   actions: {
@@ -127,6 +138,20 @@ export default new Vuex.Store({
             headers: {
               'Content-Type': 'multipart/form-data'
             }
+        })
+        .then((res) => {
+          resolve(res.data[0]);
+        })
+      })
+    },
+
+    login: (context, params) => {
+      return new Promise((resolve) => {
+        axios({
+          method: 'post',
+          params: params,
+          url: api_url + 'user/login',
+          responseType: 'json'
         })
         .then((res) => {
           resolve(res.data[0]);
