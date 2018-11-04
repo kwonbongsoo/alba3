@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
-// const api_url = "http://13.125.241.78:3000/";
-const api_url = "http://127.0.0.1:3000/";
+const api_url = "http://13.125.241.78:3000/";
+// const api_url = "http://127.0.0.1:3000/";
 
 Vue.use(Vuex)
 

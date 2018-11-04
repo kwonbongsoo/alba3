@@ -45,9 +45,10 @@
         this.$store.commit('header_title', '로그인');
         this.$store.commit('site_add_btn', false);
         if (this.login_info.is_login) {
-            this.id = this.login.id;
-            this.password = this.login.password;
-            this.auto_login();
+            this.$router.push('/');
+            // this.id = this.login.id;
+            // this.password = this.login.password;
+            // this.auto_login();
         }
     },
     methods: {
@@ -87,31 +88,31 @@
             }
             
         },
-        auto_login () {
-            let params = {
-                id: this.id,
-                password: this.password
-            }
-            this.$store.dispatch('login', params).then((res) => {
-                if (res.result == 'SUCCESS') {
-                    this.$store.commit('login_info', {
-                        id: params.id,
-                        password: params.password,
-                        is_login: true
-                    });
-                    this.$router.push('/');
-                }
-                else {
-                    this.password = '';
-                    let params = {
-                        id: '',
-                        password: '',
-                        is_login: false
-                    }
-                    this.$store.commit('login_info', params);
-                }
-            })
-        }
+        // auto_login () {
+        //     let params = {
+        //         id: this.id,
+        //         password: this.password
+        //     }
+        //     this.$store.dispatch('login', params).then((res) => {
+        //         if (res.result == 'SUCCESS') {
+        //             this.$store.commit('login_info', {
+        //                 id: params.id,
+        //                 password: params.password,
+        //                 is_login: true
+        //             });
+        //             this.$router.push('/');
+        //         }
+        //         else {
+        //             this.password = '';
+        //             let params = {
+        //                 id: '',
+        //                 password: '',
+        //                 is_login: false
+        //             }
+        //             this.$store.commit('login_info', params);
+        //         }
+        //     })
+        // }
     }
   }
 </script>
