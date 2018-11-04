@@ -19,5 +19,33 @@ module.exports = {
     })
   },
 
+  master_info (params, successFn, errorFn) {
+    this.connection.query(
+    'call master_info(?)',
+    [params.id],
+    function (error, result) {
+        console.log(error)
+        if (error) {
+            errorFn(error)
+        } else {
+            successFn(result)
+        }
+    })
+  },
+
+  master_info_update (params, successFn, errorFn) {
+    this.connection.query(
+    'call master_info_update(?, ?)',
+    [params.id, params.tel],
+    function (error, result) {
+        console.log(error)
+        if (error) {
+            errorFn(error)
+        } else {
+            successFn(result)
+        }
+    })
+  },
+
   
 } // module

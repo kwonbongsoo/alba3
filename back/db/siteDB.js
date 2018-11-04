@@ -7,7 +7,7 @@ module.exports = {
 
   l_site (successFn, errorFn) {
     this.connection.query(
-    'select * from alba3.site',
+    'call l_site()',
     function (error, result) {
         console.log(error)
         if (error) {

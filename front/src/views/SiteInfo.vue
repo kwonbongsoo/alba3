@@ -20,10 +20,10 @@
               >
             </v-flex>
             <v-flex xs12 md6 lg4>
-              <v-text-field v-model="siteName" label="사이트이름" required></v-text-field>
+              <v-text-field v-model="siteName" label="사이트이름" maxLength="30" required></v-text-field>
             </v-flex>
             <v-flex xs12 md6 lg4>
-              <v-text-field v-model="siteUrl" label="사이트URL" required></v-text-field>
+              <v-text-field v-model="siteUrl" label="사이트URL" maxLength="100" required></v-text-field>
             </v-flex>
             <v-switch v-model="newBrowserYn" :label="newBrowserYn == 'Y' ? '새 창' : '현재 창'" value='Y'></v-switch>
           </v-layout>

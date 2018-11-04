@@ -18,6 +18,14 @@
             <v-list-tile-title>사이트 리스트</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="controlGo">
+          <v-list-tile-action>
+            <v-icon>settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>정보 변경 및 푸시</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile v-show="login_info.is_login" @click="logout">
           <v-list-tile-action>
             <v-icon>clear</v-icon>
@@ -97,6 +105,9 @@ export default {
     },
     siteListGo () {
       this.$router.push('/');
+    },
+    controlGo () {
+      this.$router.push('/control');
     },
     logout () {
       let params = {

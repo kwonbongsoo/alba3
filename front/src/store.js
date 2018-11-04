@@ -101,7 +101,7 @@ export default new Vuex.Store({
         })
         .then((res) => {
           // console.log(res);
-          context.commit('sites', res.data);
+          context.commit('sites', res.data[0]);
         })
       })
     },
@@ -155,6 +155,34 @@ export default new Vuex.Store({
         })
         .then((res) => {
           resolve(res.data[0]);
+        })
+      })
+    },
+
+    master_info: (context, params) => {
+      return new Promise((resolve) => {
+        axios({
+          method: 'get',
+          params: params,
+          url: api_url + 'user/master_info',
+          responseType: 'json'
+        })
+        .then((res) => {
+          resolve(res.data[0][0]);
+        })
+      })
+    },
+
+    master_info_update: (context, params) => {
+      return new Promise((resolve) => {
+        axios({
+          method: 'get',
+          params: params,
+          url: api_url + 'user/master_info_update',
+          responseType: 'json'
+        })
+        .then((res) => {
+          resolve(res.data[0][0]);
         })
       })
     },
