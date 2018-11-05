@@ -47,5 +47,19 @@ module.exports = {
     })
   },
 
+  add_token (params, successFn, errorFn) {
+    this.connection.query(
+    'call add_token(?, ?)',
+    [params.no, params.token],
+    function (error, result) {
+        console.log(error)
+        if (error) {
+            errorFn(error)
+        } else {
+            successFn(result)
+        }
+    })
+  },
+
   
 } // module

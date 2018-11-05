@@ -71,5 +71,27 @@ router.get('/master_info', function(req, res, next) {
     });
   })
 
+  router.post('/add_token', function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+    res.setHeader("Access-Control-Max-Age", "3600");
+    res.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  
+    let params = {
+        no: parseInt(req.body.no, 10),
+        token: req.body.token
+    };
+  
+    console.log(params);
+  
+    userDB.add_token(params, (result) => {
+      res.json(result[0]);
+    }, (error) => {
+      res.status(200)
+      .set('Content-Type', 'text/plain;charset=UTF-8')
+      .end(error);
+    });
+  })
+
 
 module.exports = router;
