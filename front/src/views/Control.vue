@@ -40,6 +40,8 @@
                     <v-form>
                         <v-textarea
                             outline
+                            v-model="msg"
+                            maxLength="50"
                             name="input-7-1"
                             box
                             label="푸시 메세지 입력"
@@ -49,7 +51,7 @@
                     </v-card-text>
                     <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary">보내기</v-btn>
+                    <v-btn color="primary" @click="push_all">보내기</v-btn>
                     </v-card-actions>
                 </v-card>
                 </v-flex>
@@ -62,7 +64,7 @@
 export default {
   data: () => ({
     tel: '',
-    alliance: '',
+    msg: '',
   }),
   computed: {
     id() {
@@ -95,6 +97,18 @@ export default {
             }
             this.getTel();
         })
+    },
+
+    push_all () {
+        if (this.msg === '') {
+            alert('푸시 보낼 메세지를 입력하세요');
+        }
+        else {
+            this.$store.dispatch('push_all', {
+                msg: this.msg
+            });
+        }
+        
     }
   },
 }

@@ -186,5 +186,19 @@ export default new Vuex.Store({
         })
       })
     },
+
+    push_all: (context, params) => {
+      return new Promise((resolve) => {
+        axios({
+          method: 'get',
+          params: params,
+          url: api_url + 'push/push_all',
+          responseType: 'json'
+        })
+        .then((res) => {
+          console.log(res);
+        })
+      })
+    },
   }
 })
