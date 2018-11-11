@@ -22,7 +22,7 @@ module.exports = {
   master_info (params, successFn, errorFn) {
     this.connection.query(
     'call master_info(?)',
-    [params.id],
+    [params.no],
     function (error, result) {
         console.log(error)
         if (error) {
@@ -35,8 +35,8 @@ module.exports = {
 
   master_info_update (params, successFn, errorFn) {
     this.connection.query(
-    'call master_info_update(?, ?)',
-    [params.id, params.tel],
+    'call master_info_update(?, ?, ?)',
+    [params.id, params.tel, params.alliance_msg],
     function (error, result) {
         console.log(error)
         if (error) {

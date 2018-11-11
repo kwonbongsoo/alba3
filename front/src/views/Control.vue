@@ -18,6 +18,15 @@
                             type="text"
                             v-model="tel"
                         ></v-text-field>
+                        <v-textarea
+                            outline
+                            v-model="alliance_msg"
+                            maxLength="200"
+                            name="input-7-1"
+                            box
+                            label="제휴 정보"
+                            auto-grow
+                        ></v-textarea>
                     </v-form>
                     </v-card-text>
                     <v-card-actions>
@@ -65,6 +74,7 @@ export default {
   data: () => ({
     tel: '',
     msg: '',
+    alliance_msg: '',
   }),
   computed: {
     id() {
@@ -82,12 +92,14 @@ export default {
             id: this.id
         }).then((res) => {
             this.tel = res.tel;
+            this.alliance_msg = res.alliance_msg;
         })
     },
     updateInfo () {
         this.$store.dispatch('master_info_update', {
             id: this.id,
-            tel: this.tel
+            tel: this.tel,
+            alliance_msg: this.alliance_msg
         }).then((res) => {
             if (res.result == 'SUCCESS') {
                 alert('정보를 변경 하였습니다');
@@ -106,6 +118,15 @@ export default {
         else {
             this.$store.dispatch('push_all', {
                 msg: this.msg
+            }).then((res) => {
+                console.log(res);
+                if (res.result === 'SUCCESS') {
+                    alert('푸시를 성공적으로 보냈습니다');
+                    this.msg = '';
+                }
+                else {
+                    alert('잠시 후 시도 해주세요');
+                }
             });
         }
         

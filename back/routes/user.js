@@ -35,13 +35,35 @@ router.get('/master_info', function(req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
   
     let params = {
-        id: req.query.id
+        // id: req.query.id
+        no: 1
     };
   
     console.log(params);
   
     userDB.master_info(params, (result) => {
       res.json(result);
+    }, (error) => {
+      res.status(200)
+      .set('Content-Type', 'text/plain;charset=UTF-8')
+      .end(error);
+    });
+  });
+
+  router.get('/alliance_req', function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+    res.setHeader("Access-Control-Max-Age", "3600");
+    res.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  
+    let params = {
+        no: 1
+    };
+  
+    console.log(params);
+  
+    userDB.master_info(params, (result) => {
+      res.json(result[0]);
     }, (error) => {
       res.status(200)
       .set('Content-Type', 'text/plain;charset=UTF-8')
@@ -57,7 +79,8 @@ router.get('/master_info', function(req, res, next) {
   
     let params = {
         id: req.query.id,
-        tel: req.query.tel
+        tel: req.query.tel,
+        alliance_msg: req.query.alliance_msg
     };
   
     console.log(params);
@@ -69,7 +92,7 @@ router.get('/master_info', function(req, res, next) {
       .set('Content-Type', 'text/plain;charset=UTF-8')
       .end(error);
     });
-  })
+  });
 
   router.post('/add_token', function(req, res, next) {
     res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
@@ -91,7 +114,7 @@ router.get('/master_info', function(req, res, next) {
       .set('Content-Type', 'text/plain;charset=UTF-8')
       .end(error);
     });
-  })
+  });
 
 
 module.exports = router;

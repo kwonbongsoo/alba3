@@ -197,6 +197,7 @@ export default new Vuex.Store({
         })
         .then((res) => {
           console.log(res);
+          resolve(res.data);
         })
       })
     },
