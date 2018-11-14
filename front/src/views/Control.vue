@@ -11,17 +11,19 @@
                     </v-toolbar>
                     <v-card-text>
                     <v-form>
-                        <v-text-field 
-                            prepend-icon="phone" 
-                            name="login" 
-                            label="연락처" 
-                            type="text"
+                        <v-textarea
+                            outline
                             v-model="tel"
-                        ></v-text-field>
+                            maxLength="1000"
+                            name="input-7-1"
+                            box
+                            label="연락처"
+                            auto-grow
+                        ></v-textarea>
                         <v-textarea
                             outline
                             v-model="alliance_msg"
-                            maxLength="200"
+                            maxLength="1000"
                             name="input-7-1"
                             box
                             label="제휴 정보"
