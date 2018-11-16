@@ -122,13 +122,15 @@ export default {
                 msg: this.msg
             }).then((res) => {
                 console.log(res);
-                if (res.result === 'SUCCESS') {
-                    alert('푸시를 성공적으로 보냈습니다');
-                    this.msg = '';
-                }
-                else {
-                    alert('잠시 후 시도 해주세요');
-                }
+                this.msg = '';
+                alert('푸시를 성공적으로 보냈습니다');
+                // if (res.result === 'SUCCESS') {
+                //     alert('푸시를 성공적으로 보냈습니다');
+                //     this.msg = '';
+                // }
+                // else {
+                //     alert('잠시 후 시도 해주세요');
+                // }
             });
         }
         
